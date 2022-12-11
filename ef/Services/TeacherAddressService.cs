@@ -21,7 +21,7 @@ namespace EF.Services
             List<Teacher> teachers = wrapper.TeacherRepo.GetAll().ToList();
             foreach(Teacher teacher in teachers)
             {
-                Console.WriteLine($"Tanár: {teacher.Id} {teacher.Name} {teacher.TeacherAddress.StreetNumer} { teacher.TeacherAddress.City}");
+                Console.WriteLine($"Tanár: {teacher.Id} {teacher.Name} {teacher.TeacherAddress.StreetNumber} { teacher.TeacherAddress.City}");
             }
         }
     }

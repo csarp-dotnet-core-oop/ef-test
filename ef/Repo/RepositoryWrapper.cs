@@ -10,8 +10,9 @@ namespace EF.Repo
 {
     public class RepositoryWrapper
     {
-        SubjectRepo subjectRepo;
-        TeacherRepo teacherRepo;
+        SubjectRepo subjectRepo=null;
+        TeacherRepo teacherRepo=null;
+        TeacherAddressRepo addressRepo = null;
         TeachTeacherSubjectRepo teachTeacherSubjectRepo;
 
         public SubjectRepo SubjectRepo { get => subjectRepo; set => subjectRepo = value; }
@@ -26,9 +27,14 @@ namespace EF.Repo
         {
             TestDataContext context = new TestDataContext(contextOptions);
 
-            subjectRepo = new SubjectRepo(context);
-            teacherRepo = new TeacherRepo(context);
-            teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
+            if (subjectRepo==null)
+                subjectRepo = new SubjectRepo(context);
+            if (teacherRepo==null)
+                teacherRepo = new TeacherRepo(context);
+            if (addressRepo==null)
+                addressRepo = new TeacherAddressRepo(context);
+            
+            //teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }
     }
 }

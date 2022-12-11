@@ -18,9 +18,9 @@ namespace EF.Models
         public bool IsHeadTeacher { get => isHeadTeacher; set => isHeadTeacher = value; }
         public bool IsWoman { get => isWoman; set => isWoman = value; }
 
-        [ForeignKey("Address")]
+        [ForeignKey("TeacherAddress")]
         public long TeacherAddressId { get; set; }
-        public virtual Address TeacherAddress { get; set; }
+        public virtual TeacherAddress TeacherAddress { get; set; }
 
         public virtual ICollection<Subject> Subjects { get; set; }
 

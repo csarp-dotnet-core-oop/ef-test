@@ -1,6 +1,6 @@
 ﻿using EF.Services;
 
-TeacherService teacherService = new TeacherService();
+//TeacherService teacherService = new TeacherService();
 //teacherService.HeadTeachersName();
 //teacherService.HeadTeachersLambda();
 //teacherService.WomanTeacher();
