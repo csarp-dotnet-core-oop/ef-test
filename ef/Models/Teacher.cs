@@ -19,8 +19,8 @@ namespace EF.Models
         public bool IsWoman { get => isWoman; set => isWoman = value; }
 
         [ForeignKey("Address")]
-        public int StudentAddressId { get; set; }
-        public virtual Address StudentAddress { get; set; }
+        public long TeacherAddressId { get; set; }
+        public virtual Address TeacherAddress { get; set; }
 
         public virtual ICollection<Subject> Subjects { get; set; }
 
@@ -30,6 +30,18 @@ namespace EF.Models
             this.Name = name;
             this.IsHeadTeacher = isHeadTeacher;
             this.isWoman = isWoman;
+            this.TeacherAddressId = -1;
+            this.Subjects = null;
+        }
+
+        public Teacher(long id, string name, bool isHeadTeacher, bool isWoman, long addressId)
+            : base(id)
+        {
+            this.Name = name;
+            this.IsHeadTeacher = isHeadTeacher;
+            this.isWoman = isWoman;
+            this.TeacherAddressId = addressId;
+            this.Subjects = null;
         }
 
         public Teacher()

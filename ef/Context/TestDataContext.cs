@@ -6,6 +6,7 @@ namespace EF.Server.Context
 {
     public class TestDataContext : DbContext
     {
+        public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Address> Addresses { get; set; }
 

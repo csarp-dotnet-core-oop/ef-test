@@ -8,13 +8,15 @@ namespace EF.Models
 {
     public class Address : ClassWithId
     {
-        public Address(long id) : base(id)
+        public Address(long id, string streetNumber, string city, int zipCode) : base(id)
         {
-            
+            this.StreetNumer = streetNumber;
+            this.ZipCode = zipCode;
+            this.City= city;
         }
 
         public string StreetNumer { get; set; }
         public string City { get; set; }
-        public int Zipcode { get; set; }
+        public int ZipCode { get; set; }
     }
 }

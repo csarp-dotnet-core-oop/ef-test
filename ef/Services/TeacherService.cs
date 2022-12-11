@@ -10,7 +10,7 @@ namespace EF.Services
 {
     class TeacherService
     {
-        public TeacherRepo teacherRepo = new TeacherRepo();
+        public RepositoryWrapper wrapper = new RepositoryWrapper();
 
         public TeacherService()
         {            
@@ -19,7 +19,7 @@ namespace EF.Services
         // Osztályfőnökök nevei
         public void HeadTeachersName()
         {
-            List<string> headTeacher = (from teacher in teacherRepo.Teachers
+            List<string> headTeacher = (from teacher in wrapper.TeacherRepo.GetAll()
                                         where teacher.IsHeadTeacher
                                         select teacher.Name).ToList();
             Console.WriteLine("Osztályfőnökök:");
@@ -32,7 +32,10 @@ namespace EF.Services
 
         public void HeadTeachersLambda()
         {
-            List<string> headTeacher = teacherRepo.Teachers.Where(teacher => teacher.IsHeadTeacher).Select(teacher => teacher.Name).ToList();
+            List<string> headTeacher = wrapper.TeacherRepo
+                .GetAll()
+                .Where(teacher => teacher.IsHeadTeacher).Select(teacher => teacher.Name)
+                .ToList();
             Console.WriteLine("Osztályfőnökök:");
             foreach (string name in headTeacher)
             {
@@ -43,7 +46,7 @@ namespace EF.Services
         // Hölgy tanárok id-je és nevei
         public void WomanTeacher()
         {
-            var womanTeacher = from teacher in teacherRepo.Teachers
+            var womanTeacher = from teacher in wrapper.TeacherRepo.GetAll()
                                where teacher.IsWoman
                                select new
                                {
@@ -60,7 +63,11 @@ namespace EF.Services
 
         public void WomanTeacherLambda()
         {
-            var womanTeacher = teacherRepo.Teachers.Where(teacher => teacher.IsWoman).Select(teacher => new {Id = teacher.Id,Name=teacher.Name}).ToList();
+            var womanTeacher = wrapper.TeacherRepo
+                .GetAll()
+                .Where(teacher => teacher.IsWoman)
+                .Select(teacher => new {Id = teacher.Id,Name=teacher.Name})
+                .ToList();
 
             Console.WriteLine("Höly tanárok:");
             foreach (var teacher in womanTeacher)
@@ -72,7 +79,7 @@ namespace EF.Services
         // Számozás és új adat
         public void WomanTeacherIndex()
         {
-            var womanTeacher = from teacher in teacherRepo.Teachers.Select((value,index) => new {value, index})
+            var womanTeacher = from teacher in wrapper.TeacherRepo.GetAll().Select((value,index) => new {value, index})
                                where teacher.value.IsWoman
                                select new
                                {
@@ -92,7 +99,7 @@ namespace EF.Services
         // Számozás és új adat
         public void WomanTeacherIndexLambda()
         {
-            var womanTeacher = teacherRepo.Teachers.Where(teacher => teacher.IsWoman)
+            var womanTeacher = wrapper.TeacherRepo.GetAll().Where(teacher => teacher.IsWoman)
                 .Select((teacher, index) => new
                 {
                     IndexPosition = index,

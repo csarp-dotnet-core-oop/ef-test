@@ -8,6 +8,11 @@ TeacherService teacherService = new TeacherService();
 //teacherService.WomanTeacherIndex();
 //teacherService.WomanTeacherIndexLambda();
 
+TeacherAddressService teacherAndAddress = new TeacherAddressService();
+teacherAndAddress.TeacherAndAddress();
+
+
+
 
 //TeachTeacherSubjectService teachTeacherSubjectService = new TeachTeacherSubjectService();
 //teachTeacherSubjectService.TeacherSubjectPair();

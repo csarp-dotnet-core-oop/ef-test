@@ -11,9 +11,9 @@ namespace EF.Repos
         private bool disposed = false;
         protected TestDataContext Context { get; set; }
 
-        public RepositoryBase(TestDataContext kretaContext)
+        public RepositoryBase(TestDataContext context)
         {
-            Context = kretaContext;
+            Context = context;
         }
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
@@ -42,7 +42,6 @@ namespace EF.Repos
             if (entity != null)
             {
                 Context.Remove(entity);
-                //KretaContext.SaveChanges();
             }
         }
 

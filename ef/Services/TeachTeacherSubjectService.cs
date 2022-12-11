@@ -11,19 +11,19 @@ namespace EF.Services
     // https://dotnettutorials.net/lesson/introduction-to-linq/
     public class TeachTeacherSubjectService
     {
-        RepositoryWrapper repositoryWrapper;
+        RepositoryWrapper wrapper;
 
         public TeachTeacherSubjectService()
         {
-            repositoryWrapper = new RepositoryWrapper();
+            wrapper = new RepositoryWrapper();
         }
 
         // 1. feladat
         // Tanár tantárgy párok
         public void TeacherSubjectPair()
         {
-            List<TeacherSubjectPair> result = (from teacher in repositoryWrapper.TeacherRepo.Teachers
-                                               from subject in repositoryWrapper.SubjectRepo.Subjects
+            List<TeacherSubjectPair> result = (from teacher in wrapper.TeacherRepo.GetAll()
+                                               from subject in wrapper.SubjectRepo.GetAll()
                                                orderby teacher.Name
                                                select new TeacherSubjectPair
                                                {
@@ -38,8 +38,8 @@ namespace EF.Services
 
         public void TeacherSubjectPairLinq()
         {
-            var result = repositoryWrapper.TeacherRepo.Teachers.SelectMany(
-                    teacher => repositoryWrapper.SubjectRepo.Subjects, (teacher, subject) => new TeacherSubjectPair
+            var result = wrapper.TeacherRepo.GetAll().SelectMany(
+                    teacher => wrapper.SubjectRepo.GetAll(), (teacher, subject) => new TeacherSubjectPair
                     {
                         Teacher = teacher.Name,
                         Subject = subject.Name
@@ -55,9 +55,9 @@ namespace EF.Services
         // Ki melyik tantárgyat tanítja
         public void TeacherTeachSubjects()
         {
-            List<TeacherSubjectPair> result = (from teacher in repositoryWrapper.TeacherRepo.Teachers
-                                               from subject in repositoryWrapper.SubjectRepo.Subjects
-                                               from teaching in repositoryWrapper.TeachTeacherSubjectRepo.Teachings
+            List<TeacherSubjectPair> result = (from teacher in wrapper.TeacherRepo.GetAll()
+                                               from subject in wrapper.SubjectRepo.GetAll()
+                                               from teaching in wrapper.TeachTeacherSubjectRepo.Teachings
                                                where teaching.TeacherId==teacher.Id && teaching.SubjectId==subject.Id
                                                orderby teacher.Name
                                                select new TeacherSubjectPair
@@ -75,9 +75,9 @@ namespace EF.Services
         // Tantárgyanként hány tanító tanár van
         public void NumberOfTeacherPerSubject()
         {
-            Dictionary<String, int> result = (from teacher in repositoryWrapper.TeacherRepo.Teachers
-                                              from subject in repositoryWrapper.SubjectRepo.Subjects
-                                              from teaching in repositoryWrapper.TeachTeacherSubjectRepo.Teachings
+            Dictionary<String, int> result = (from teacher in wrapper.TeacherRepo.GetAll()
+                                              from subject in wrapper.SubjectRepo.GetAll()
+                                              from teaching in wrapper.TeachTeacherSubjectRepo.Teachings
                                               where teaching.TeacherId == teacher.Id && teaching.SubjectId == subject.Id
                                               group teacher by teacher.Name into teacherGroup
                                               select new TeacherNumberPair
