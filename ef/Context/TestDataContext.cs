@@ -16,9 +16,13 @@ namespace EF.Server.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // https://www.yogihosting.com/fluent-api-one-to-one-relationship-entity-framework-core/
+            // https://www.youtube.com/watch?v=Zt4G9HB6-C4&ab_channel=CodeSemantic
+
             modelBuilder.Entity<TeacherAddress>()
                 .HasOne(teacherAddress => teacherAddress.Teacher)
-                .WithOne(teacher => teacher.TeacherAddress);
+                .WithOne(teacher => teacher.TeacherAddress)
+                .HasForeignKey<Teacher>(teacher => teacher.TeacherAddressId);
 
             modelBuilder.Entity<Teacher>()
                  .HasOne(teacher => teacher.TeacherAddress)
