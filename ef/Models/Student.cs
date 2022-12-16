@@ -14,22 +14,22 @@ namespace EF.Models
 
         public string Name { get => name; set => name = value; }
 
-        [ForeignKey("SchoolClass")]
+        /*[ForeignKey("SchoolClass")]
         public int SchoolClassId { get => schoolClassId; set => schoolClassId = value; }
-        public virtual SchoolClass SchoolClass { get; set; }
+        public virtual SchoolClass SchoolClass { get; set; }*/
 
-        [ForeignKey("ParentAddress")]
-        public int StudentAddressId { get; set; }
-        public virtual Address ParentAddress { get; set; }
-
+        public long StudentAddressId { get; set; }
+        public virtual Address StudentAddress { get; set; }
 
 
-        public Student(long id, string name, int schoolClassId)
-            :base(id)
+
+        public Student(long id, string name, int schoolClassId, long studentAddressId)
+            : base(id)
         {
 
             this.name = name;
             this.schoolClassId = schoolClassId;
+            StudentAddressId = studentAddressId;    
         }
 
         public Student()

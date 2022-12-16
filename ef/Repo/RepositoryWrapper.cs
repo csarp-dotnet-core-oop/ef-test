@@ -12,15 +12,18 @@ namespace EF.Repo
     {
         SubjectRepo subjectRepo=null;
         TeacherRepo teacherRepo=null;
-        TeacherAddressRepo addressRepo = null;
+        AddressRepo addressRepo = null;
+        StudentRepo studentRepo = null;
         TeachTeacherSubjectRepo teachTeacherSubjectRepo;
 
         public SubjectRepo SubjectRepo { get => subjectRepo; set => subjectRepo = value; }
         public TeacherRepo TeacherRepo { get => teacherRepo; set => teacherRepo = value; }
+        public StudentRepo StudentRepo { get => studentRepo; set => studentRepo = value; }
+
         public TeachTeacherSubjectRepo TeachTeacherSubjectRepo { get => teachTeacherSubjectRepo; set => teachTeacherSubjectRepo = value; }
 
         public static DbContextOptions<TestDataContext> contextOptions = new DbContextOptionsBuilder<TestDataContext>()
-                                        .UseInMemoryDatabase(databaseName: "KretaContext" + Guid.NewGuid().ToString())
+                                        .UseInMemoryDatabase(databaseName: "KretaDb" + Guid.NewGuid().ToString())
                                         .Options;
 
         public RepositoryWrapper()
@@ -32,7 +35,9 @@ namespace EF.Repo
             if (teacherRepo==null)
                 teacherRepo = new TeacherRepo(context);
             if (addressRepo==null)
-                addressRepo = new TeacherAddressRepo(context);
+                addressRepo = new AddressRepo(context);
+            if (studentRepo == null)
+                studentRepo = new StudentRepo(context);
             
             //teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }

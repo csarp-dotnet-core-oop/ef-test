@@ -8,7 +8,8 @@ namespace EF.Server.Context
     {
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<TeacherAddress> TeacherAddresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         public TestDataContext(DbContextOptions<TestDataContext> options) : base(options)
         { 
@@ -19,16 +20,22 @@ namespace EF.Server.Context
             // https://www.yogihosting.com/fluent-api-one-to-one-relationship-entity-framework-core/
             // https://www.youtube.com/watch?v=Zt4G9HB6-C4&ab_channel=CodeSemantic
 
-            modelBuilder.Entity<TeacherAddress>()
-                .HasOne(teacherAddress => teacherAddress.Teacher)
-                .WithOne(teacher => teacher.TeacherAddress)
-                .HasForeignKey<Teacher>(teacher => teacher.TeacherAddressId);
+            /*modelBuilder.Entity<Teacher>()
+                .HasKey(teacher => teacher.Id);*/
+            /*modelBuilder.Entity<TeacherAddress>()
+                .HasKey(address => address.Id);*/
+
 
             modelBuilder.Entity<Teacher>()
-                 .HasOne(teacher => teacher.TeacherAddress)
-                 .WithOne(teacherAddress => teacherAddress.Teacher)
+                 .HasOne<Address>(teacher => teacher.TeacherAddress)
+                 .WithOne()
                  .HasForeignKey<Teacher>(teacher => teacher.TeacherAddressId);
-            
+
+            modelBuilder.Entity<Student>()
+                .HasOne<Address>(student => student.StudentAddress)
+                .WithOne()
+                .HasForeignKey<Student>(student => student.StudentAddressId);
+
             
                  
                     

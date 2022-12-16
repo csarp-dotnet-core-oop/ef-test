@@ -24,8 +24,8 @@ namespace EF.Repo
         {
             if (testDataContext != null)
             {
-                testDataContext.Teachers.Add(new Teacher(1, "Feldolgozó Feri", true, false,1));
-                testDataContext.Teachers.Add(new Teacher(2, "Jegyölő János", false, false,2));
+                testDataContext.Teachers.Add(new Teacher(1, "Feldolgozó Feri", true, false,2));
+                testDataContext.Teachers.Add(new Teacher(2, "Jegyölő János", false, false,1));
                 testDataContext.Teachers.Add(new Teacher(3, "Olvasó Olga", true, true,3));
                 testDataContext.Teachers.Add(new Teacher(4, "Számoló Szonja", true, true,4));
                 testDataContext.Teachers.Add(new Teacher(5, "Utazó Ulrich", false, false,5));
