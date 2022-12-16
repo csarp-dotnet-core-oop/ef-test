@@ -12,15 +12,23 @@ namespace EF.Models
 
         }
 
+        public SchoolClass()
+             : base(-1)
+        {
+            SchoolYear = -1;
+            ClassType = char.MinValue;
+            HeadTeacherId = -1;
+        }
+
         public virtual int SchoolYear { get; set; }
 
         public virtual char ClassType { get; set; }
 
-        [ForeignKey("HeadTeacher")]
+        // one-zero
         public long HeadTeacherId { get; set; }
         public virtual Teacher HeadTeacher { get; set; }
 
-
-        public ICollection<Student> Students { get; set; }
+        // one - many
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

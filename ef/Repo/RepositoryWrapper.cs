@@ -14,11 +14,13 @@ namespace EF.Repo
         TeacherRepo teacherRepo=null;
         AddressRepo addressRepo = null;
         StudentRepo studentRepo = null;
+        SchoolClassRepo schoolClassRepo = null;
         TeachTeacherSubjectRepo teachTeacherSubjectRepo;
 
         public SubjectRepo SubjectRepo { get => subjectRepo; set => subjectRepo = value; }
         public TeacherRepo TeacherRepo { get => teacherRepo; set => teacherRepo = value; }
         public StudentRepo StudentRepo { get => studentRepo; set => studentRepo = value; }
+        public SchoolClassRepo SchoolClassRepo { get => schoolClassRepo; set => schoolClassRepo = value; }
 
         public TeachTeacherSubjectRepo TeachTeacherSubjectRepo { get => teachTeacherSubjectRepo; set => teachTeacherSubjectRepo = value; }
 
@@ -38,6 +40,8 @@ namespace EF.Repo
                 addressRepo = new AddressRepo(context);
             if (studentRepo == null)
                 studentRepo = new StudentRepo(context);
+            if (schoolClassRepo == null)
+                schoolClassRepo = new SchoolClassRepo(context);
             
             //teachTeacherSubjectRepo = new TeachTeacherSubjectRepo();
         }

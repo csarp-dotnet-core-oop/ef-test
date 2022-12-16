@@ -9,26 +9,25 @@ namespace EF.Models
 {
     public class Student : ClassWithId
     {
-        private string name;
-        private int schoolClassId;
 
-        public string Name { get => name; set => name = value; }
+        public string Name { get; set ; }
 
-        /*[ForeignKey("SchoolClass")]
-        public int SchoolClassId { get => schoolClassId; set => schoolClassId = value; }
-        public virtual SchoolClass SchoolClass { get; set; }*/
-
+        // navigation property
+        // one- one
         public long StudentAddressId { get; set; }
         public virtual Address StudentAddress { get; set; }
 
+        // one-many
+        public long SchoolClassId { get; set ; }
+        public virtual SchoolClass SchoolClassOfStudent { get; set; }
 
 
         public Student(long id, string name, int schoolClassId, long studentAddressId)
             : base(id)
         {
 
-            this.name = name;
-            this.schoolClassId = schoolClassId;
+            Name = name;
+            SchoolClassId = schoolClassId;
             StudentAddressId = studentAddressId;    
         }
 
@@ -36,8 +35,8 @@ namespace EF.Models
             :base(-1)
         {
 
-            name = string.Empty;
-            schoolClassId = -1;
+            Name = string.Empty;
+            SchoolClassId = -1;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace EF.Services
 {
     public class AddressService
     {
-        RepositoryWrapper wrapper = new RepositoryWrapper();
+        private RepositoryWrapper wrapper = new RepositoryWrapper();
 
         public AddressService()
         {

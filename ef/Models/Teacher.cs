@@ -18,13 +18,13 @@ namespace EF.Models
         public bool IsHeadTeacher { get => isHeadTeacher; set => isHeadTeacher = value; }
         public bool IsWoman { get => isWoman; set => isWoman = value; }
 
-        // navigation property
-        //[ForeignKey(nameof(Address))]
-
+        // navigation property        
+        // one - one
         public long TeacherAddressId { get; set; }
         public virtual Address TeacherAddress { get; set; }
 
-        public virtual ICollection<Subject> Subjects { get; set; }
+        // one - many
+        public virtual ICollection<Subject> TeachedSubjects { get; set; }
 
 
         public Teacher(long id, string name, bool isHeadTeacher, bool isWoman, long addressId)
@@ -33,7 +33,6 @@ namespace EF.Models
             this.Name = name;
             this.IsHeadTeacher = isHeadTeacher;
             this.isWoman = isWoman;
-            this.Subjects = null;
             this.TeacherAddressId = addressId;
         }
 

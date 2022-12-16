@@ -9,9 +9,6 @@ namespace EF.Models
     public class Subject :ClassWithId
     {
         private string name;
-
-        public virtual ICollection<Teacher> Teachers { get; set; }
-
         public string Name { get => name; set => name = value; }
 
         public Subject()

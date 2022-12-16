@@ -11,7 +11,7 @@ namespace EF.Services
     // https://dotnettutorials.net/lesson/introduction-to-linq/
     public class TeachTeacherSubjectService
     {
-        RepositoryWrapper wrapper;
+        private RepositoryWrapper wrapper;
 
         public TeachTeacherSubjectService()
         {
@@ -28,7 +28,7 @@ namespace EF.Services
                                                select new TeacherSubjectPair
                                                {
                                                    Teacher = teacher.Name,
-                                                   Subject = subject.Name                                                   
+                                                   Subject = subject.Name                                            
                                                }).ToList();
 
             Console.WriteLine("Tanár - tantárgy párok:");

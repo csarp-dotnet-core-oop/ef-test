@@ -10,7 +10,7 @@ namespace EF.Services
 {
     class TeacherService
     {
-        public RepositoryWrapper wrapper = new RepositoryWrapper();
+        private RepositoryWrapper wrapper = new RepositoryWrapper();
 
         public TeacherService()
         {            

@@ -10,22 +10,25 @@ namespace EF.Server.Context
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<SchoolClass> SchoolClasses { get; set; }
 
         public TestDataContext(DbContextOptions<TestDataContext> options) : base(options)
         { 
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.LogTo(Console.WriteLine);
+            //optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // https://www.entityframeworktutorial.net/efcore
             // https://www.yogihosting.com/fluent-api-one-to-one-relationship-entity-framework-core/
             // https://www.youtube.com/watch?v=Zt4G9HB6-C4&ab_channel=CodeSemantic
 
-            /*modelBuilder.Entity<Teacher>()
-                .HasKey(teacher => teacher.Id);*/
-            /*modelBuilder.Entity<TeacherAddress>()
-                .HasKey(address => address.Id);*/
-
-
+            // one - one relationship
             modelBuilder.Entity<Teacher>()
                  .HasOne<Address>(teacher => teacher.TeacherAddress)
                  .WithOne()
@@ -35,8 +38,19 @@ namespace EF.Server.Context
                 .HasOne<Address>(student => student.StudentAddress)
                 .WithOne()
                 .HasForeignKey<Student>(student => student.StudentAddressId);
+           
+            // one - many relationship
+            modelBuilder.Entity<Student>()
+                .HasOne<SchoolClass>(student => student.SchoolClassOfStudent)
+                .WithMany(schoolClass => schoolClass.Students)
+                .HasForeignKey(student => student.SchoolClassId);
 
-            
+            /*modelBuilder.Entity<SchoolClass>()
+                .HasMany<Student>(scoolClass => scoolClass.Students)
+                .WithOne(schoolClass => schoolClass.SchoolClassOfStudent)
+                .HasForeignKey(student => student.SchoolClassId)
+                .OnDelete(DeleteBehavior.Cascade);*/
+
                  
                     
 
