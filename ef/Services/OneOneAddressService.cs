@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace EF.Services
 {
-    public class AddressService
+    public class OneOneAddressService
     {
         private RepositoryWrapper wrapper = new RepositoryWrapper();
 
-        public AddressService()
+        public OneOneAddressService()
         {
         }
 

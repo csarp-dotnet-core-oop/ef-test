@@ -12,9 +12,9 @@
 //addressService.TeacherAndAddress();
 //addressService.StudentAndAddress();
 
-StudentOfClassService studentOfClassService= new StudentOfClassService();
-studentOfClassService.StudentWithClass();
-studentOfClassService.StudentOfClass();
+//OneManyStudentOfClassService studentOfClassService= new OneManyStudentOfClassService();
+//studentOfClassService.StudentWithClass();
+//studentOfClassService.StudentOfClass();
 
 
 //TeachTeacherSubjectService teachTeacherSubjectService = new TeachTeacherSubjectService();
@@ -22,4 +22,8 @@ studentOfClassService.StudentOfClass();
 //teachTeacherSubjectService.TeacherSubjectPairLinq();
 //teachTeacherSubjectService.TeacherTeachSubjects();
 //teachTeacherSubjectService.NumberOfTeacherPerSubject();
+
+ManyManyTeachTeacherSubjectService tts = new ManyManyTeachTeacherSubjectService();
+tts.TeacherSubjectPair();
+
 Console.ReadKey();

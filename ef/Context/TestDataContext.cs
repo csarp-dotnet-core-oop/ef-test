@@ -11,6 +11,7 @@ namespace EF.Server.Context
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<TeachTeacherSubject> TeachTeaherSubjects { get; set; }
 
         public TestDataContext(DbContextOptions<TestDataContext> options) : base(options)
         { 
@@ -24,7 +25,8 @@ namespace EF.Server.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // https://www.entityframeworktutorial.net/efcore
+            // https://www.entityframeworktutorial.net/efcore/configure-one-to-one-relationship-using-fluent-api-in-ef-core.aspx
+            // https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx
             // https://www.yogihosting.com/fluent-api-one-to-one-relationship-entity-framework-core/
             // https://www.youtube.com/watch?v=Zt4G9HB6-C4&ab_channel=CodeSemantic
 
@@ -50,6 +52,21 @@ namespace EF.Server.Context
                 .WithOne(schoolClass => schoolClass.SchoolClassOfStudent)
                 .HasForeignKey(student => student.SchoolClassId)
                 .OnDelete(DeleteBehavior.Cascade);*/
+
+
+            // many - many ralition ship
+            modelBuilder.Entity<TeachTeacherSubject>()
+                .HasKey(tts => new { tts.SubjectId, tts.TeacherId });
+
+            modelBuilder.Entity<TeachTeacherSubject>()
+                .HasOne<Teacher>(tts => tts.Techher)
+                .WithMany()
+                .HasForeignKey(tts => tts.TeacherId);
+
+            modelBuilder.Entity<TeachTeacherSubject>()
+                .HasOne<Subject>(tts => tts.Subject)
+                .WithMany()
+                .HasForeignKey(tts => tts.SubjectId);
 
                  
                     

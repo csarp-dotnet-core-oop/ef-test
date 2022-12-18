@@ -8,11 +8,11 @@ using EF.Repo;
 
 namespace EF.Services
 {
-    class TeacherService
+    class LinqTeacherService
     {
         private RepositoryWrapper wrapper = new RepositoryWrapper();
 
-        public TeacherService()
+        public LinqTeacherService()
         {            
         }
 

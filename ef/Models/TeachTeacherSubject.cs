@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace EF.Models
 {
-    public class TeachTeaherSubject
+    public class TeachTeacherSubject
     {
         private long teacherId;
         private long subjectId;
 
         public long TeacherId { get => teacherId; set => teacherId = value; }
-        public long SubjectId { get => subjectId; set => subjectId = value; }
+        //navigation property
+        public virtual Teacher Techher{ get; set; }
 
-        public TeachTeaherSubject(long teacherId, long subjectId)
+        public long SubjectId { get => subjectId; set => subjectId = value; }
+        // navigatin property
+        public virtual Subject Subject { get; set; } 
+
+        public TeachTeacherSubject(long teacherId, long subjectId)
         {
             this.teacherId = teacherId;
             this.subjectId = subjectId;

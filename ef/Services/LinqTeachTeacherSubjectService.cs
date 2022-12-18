@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace EF.Services
 {
     // https://dotnettutorials.net/lesson/introduction-to-linq/
-    public class TeachTeacherSubjectService
+    public class LinqTeachTeacherSubjectService
     {
         private RepositoryWrapper wrapper;
 
-        public TeachTeacherSubjectService()
+        public LinqTeachTeacherSubjectService()
         {
             wrapper = new RepositoryWrapper();
         }
@@ -57,7 +57,7 @@ namespace EF.Services
         {
             List<TeacherSubjectPair> result = (from teacher in wrapper.TeacherRepo.GetAll()
                                                from subject in wrapper.SubjectRepo.GetAll()
-                                               from teaching in wrapper.TeachTeacherSubjectRepo.Teachings
+                                               from teaching in wrapper.TeachTeacherSubjectRepo.GetAll()
                                                where teaching.TeacherId==teacher.Id && teaching.SubjectId==subject.Id
                                                orderby teacher.Name
                                                select new TeacherSubjectPair
@@ -77,7 +77,7 @@ namespace EF.Services
         {
             Dictionary<String, int> result = (from teacher in wrapper.TeacherRepo.GetAll()
                                               from subject in wrapper.SubjectRepo.GetAll()
-                                              from teaching in wrapper.TeachTeacherSubjectRepo.Teachings
+                                              from teaching in wrapper.TeachTeacherSubjectRepo.GetAll()
                                               where teaching.TeacherId == teacher.Id && teaching.SubjectId == subject.Id
                                               group teacher by teacher.Name into teacherGroup
                                               select new TeacherNumberPair

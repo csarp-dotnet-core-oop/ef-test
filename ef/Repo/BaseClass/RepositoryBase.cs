@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EF.Repos
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : ClassWithId
+    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         private bool disposed = false;
         protected TestDataContext Context { get; set; }

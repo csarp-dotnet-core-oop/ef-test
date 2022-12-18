@@ -10,11 +10,11 @@ using System.Xml.Linq;
 
 namespace EF.Services
 {
-    public class StudentOfClassService
+    public class OneManyStudentOfClassService
     {
         private RepositoryWrapper wrapper = new RepositoryWrapper();
 
-        public StudentOfClassService()
+        public OneManyStudentOfClassService()
         {                
         }
 

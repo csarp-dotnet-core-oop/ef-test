@@ -23,7 +23,7 @@ namespace EF.Models
         public long TeacherAddressId { get; set; }
         public virtual Address TeacherAddress { get; set; }
 
-        // one - many
+        // many - many
         public virtual ICollection<Subject> TeachedSubjects { get; set; }
 
 

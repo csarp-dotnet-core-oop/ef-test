@@ -23,5 +23,9 @@ namespace EF.Models
         {
             this.name = name;
         }
+
+        //navigation property
+        // many-many
+        public ICollection<Teacher> TeacherWhoTechSubject { get; set; }
     }
 }

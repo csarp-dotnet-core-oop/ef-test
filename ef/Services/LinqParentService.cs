@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace EF.Services
 {
-    class ParentService
+    class LinqParentService
     {
         private ParentRepo parentRepo;
 
-        public ParentService()
+        public LinqParentService()
         {
             parentRepo = new ParentRepo();
         }
