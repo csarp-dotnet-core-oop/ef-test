@@ -11,6 +11,11 @@ namespace EF.Models
         private string name;
         public string Name { get => name; set => name = value; }
 
+        private long subjectTypeId;
+
+        public long SubjectTypeId { get => subjectTypeId; set => subjectTypeId = value; }        
+
+
         public Subject()
             : base(-1)
         {
@@ -18,14 +23,13 @@ namespace EF.Models
             name=string.Empty;
         }
 
-        public Subject(long id, string name)
+        public Subject(long id, string name, long typeId)
             :base(id)
         {
             this.name = name;
+            this.subjectTypeId = typeId;
         }
 
-        //navigation property
-        // many-many
-        public ICollection<Teacher> TeacherWhoTechSubject { get; set; }
+        
     }
 }

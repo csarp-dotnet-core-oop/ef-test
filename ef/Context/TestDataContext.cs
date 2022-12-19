@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-using EF.Models;
+﻿using EF.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF.Server.Context
 {
@@ -11,7 +10,9 @@ namespace EF.Server.Context
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<TypeOfSubject> TypeOfSubjects { get; set; }
         public DbSet<TeachTeacherSubject> TeachTeaherSubjects { get; set; }
+        public DbSet<TeachTeacherSchoolClass> TeachTeacherSchoolClasses { get; set }
 
         public TestDataContext(DbContextOptions<TestDataContext> options) : base(options)
         { 
@@ -47,12 +48,6 @@ namespace EF.Server.Context
                 .WithMany(schoolClass => schoolClass.Students)
                 .HasForeignKey(student => student.SchoolClassId);
 
-            /*modelBuilder.Entity<SchoolClass>()
-                .HasMany<Student>(scoolClass => scoolClass.Students)
-                .WithOne(schoolClass => schoolClass.SchoolClassOfStudent)
-                .HasForeignKey(student => student.SchoolClassId)
-                .OnDelete(DeleteBehavior.Cascade);*/
-
 
             // many - many ralition ship
             modelBuilder.Entity<TeachTeacherSubject>()
@@ -66,10 +61,7 @@ namespace EF.Server.Context
             modelBuilder.Entity<TeachTeacherSubject>()
                 .HasOne<Subject>(tts => tts.Subject)
                 .WithMany()
-                .HasForeignKey(tts => tts.SubjectId);
-
-                 
-                    
+                .HasForeignKey(tts => tts.SubjectId);                                  
 
             base.OnModelCreating(modelBuilder);
         }

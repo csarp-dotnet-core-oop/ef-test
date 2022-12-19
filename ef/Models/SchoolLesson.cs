@@ -8,19 +8,19 @@ namespace EF.Models
 {
     public class SchoolLesson : ClassWithId
     {
-        long studentId;
+        long schoolClassId;
         long teacherId;
         long subjectId;
 
         public long SchoolLessonId { get => Id; set => Id = value; }
-        public long StudentId { get => studentId; set => studentId = value; }
+        public long StudentId { get => schoolClassId; set => schoolClassId = value; }
         public long TeacherId { get => teacherId; set => teacherId = value; }
         public long SubjectId { get => subjectId; set => subjectId = value; }
 
         public SchoolLesson(long schoolLessonId, long studentId, long teacherId, long subjectId)
             : base(schoolLessonId)
         {
-            this.studentId = studentId;
+            this.schoolClassId = studentId;
             this.teacherId = teacherId;
             this.subjectId = subjectId;
         }
@@ -28,7 +28,7 @@ namespace EF.Models
         public SchoolLesson():
             base(-1)
         {
-            studentId = -1;
+            schoolClassId = -1;
             teacherId = -1;
             subjectId = -1;
         }

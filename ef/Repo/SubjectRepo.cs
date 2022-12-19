@@ -24,16 +24,18 @@ namespace EF.Repo
         {
             if (testDataContext != null)
             {
-                testDataContext.Subjects.Add(new Subject(1, "Matematika"));
-                testDataContext.Subjects.Add(new Subject(2, "Magyar nyelv"));
-                testDataContext.Subjects.Add(new Subject(3, "Irodalom"));
-                testDataContext.Subjects.Add(new Subject(4, "Angol nyelv"));
-                testDataContext.Subjects.Add(new Subject(5, "Német nyelv"));
-                testDataContext.Subjects.Add(new Subject(6, "Történelem"));
-                testDataContext.Subjects.Add(new Subject(7, "Rajz"));
-                testDataContext.Subjects.Add(new Subject(8, "Testnevelés"));
-                testDataContext.Subjects.Add(new Subject(9, "Fizika"));
-                testDataContext.Subjects.Add(new Subject(10, "Kémia"));
+                testDataContext.Subjects.Add(new Subject(1, "Matematika",1));
+                testDataContext.Subjects.Add(new Subject(2, "Magyar nyelv",2));
+                testDataContext.Subjects.Add(new Subject(3, "Irodalom",2));
+                testDataContext.Subjects.Add(new Subject(4, "Angol nyelv", 2));
+                testDataContext.Subjects.Add(new Subject(5, "Német nyelv", 2));
+                testDataContext.Subjects.Add(new Subject(6, "Történelem",3));
+                testDataContext.Subjects.Add(new Subject(7, "Rajz", 4));
+                testDataContext.Subjects.Add(new Subject(8, "Testnevelés",1));
+                testDataContext.Subjects.Add(new Subject(9, "Fizika", 1));
+                testDataContext.Subjects.Add(new Subject(10, "Kémia",1));
+                testDataContext.Subjects.Add(new Subject(11, "Zene",4));
+                testDataContext.Subjects.Add(new Subject(12, "Biológia",2));
                 testDataContext.SaveChanges();
             }
         }

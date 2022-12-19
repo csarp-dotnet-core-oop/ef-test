@@ -10,28 +10,23 @@ namespace EF.Models
 {
     public class TeachTeacherSchoolClass
     {
-        private long subjectId;
         private long teacherId;
+        private long schoolClassId;
 
         
-        public long SubjectId { get => subjectId; set => subjectId = value; }
         public long TeacherId { get => teacherId; set => teacherId = value; }
+        public long SchoolClassId { get => schoolClassId; set => schoolClassId = value; }
 
-        [ForeignKey("SubjectId")]
-        public Subject Subject { get; set; }
-        [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
-
-        public TeachTeacherSchoolClass(long subjectId, long teacherId)
+        public TeachTeacherSchoolClass(long teacherId, long schoolClassId)
         {
-            this.subjectId = subjectId;
             this.teacherId = teacherId;
+            this.schoolClassId = schoolClassId;
         }
 
         public TeachTeacherSchoolClass()
         {
-            subjectId = -1;
             teacherId = -1;
+            schoolClassId = -1;
         }
     }
 }
