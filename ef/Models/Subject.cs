@@ -30,6 +30,10 @@ namespace EF.Models
             this.subjectTypeId = typeId;
         }
 
+        public override string ToString() 
+        {
+            return $"{Id} {name}";
+        }
         
     }
 }

@@ -1,4 +1,4 @@
-﻿using EF.Server.Context;
+﻿using EF.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,10 @@ namespace EF.Repo
 {
     public class RepositoryWrapper
     {
+        public static DbContextOptions<InMemoryContext> contextOptions = new DbContextOptionsBuilder<InMemoryContext>()
+            .UseInMemoryDatabase(databaseName: "KretaTest" + Guid.NewGuid().ToString())
+            .Options;
+
         private SubjectRepo? subjectRepo = null;
         private TeacherRepo? teacherRepo = null;
         private AddressRepo? addressRepo = null;
@@ -30,13 +34,13 @@ namespace EF.Repo
 
         
 
-        public static DbContextOptions<TestDataContext> contextOptions = new DbContextOptionsBuilder<TestDataContext>()
-                                        .UseInMemoryDatabase(databaseName: "KretaDb" + Guid.NewGuid().ToString())
-                                        .Options;
+    //    public static DbContextOptions<TestDataContext> contextOptions = new DbContextOptionsBuilder<TestDataContext>()
+    //                                    .UseInMemoryDatabase(databaseName: "KretaDb" + Guid.NewGuid().ToString())
+    //                                    .Options;
 
         public RepositoryWrapper()
         {
-            TestDataContext context = new TestDataContext(contextOptions);
+            InMemoryContext context = new InMemoryContext(contextOptions);
 
             if (subjectRepo==null)
                 subjectRepo = new SubjectRepo(context);

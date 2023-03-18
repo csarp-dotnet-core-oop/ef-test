@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using EF.Context;
 using EF.Models;
 using EF.Repos;
-using EF.Server.Context;
 
 namespace EF.Repo
 {
     public class StudentRepo : RepositoryBase<Student>
     {
 
-        private TestDataContext? testDataContext;
-        public StudentRepo(TestDataContext testDataContext) : base(testDataContext)
+        private InMemoryContext? testDataContext;
+        public StudentRepo(InMemoryContext testDataContext) : base(testDataContext)
         {
             this.testDataContext = testDataContext;
             MakeTestData();

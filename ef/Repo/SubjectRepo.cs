@@ -1,7 +1,8 @@
-﻿using EF.Models;
+﻿using EF.Context;
+using EF.Models;
 using EF.Models;
 using EF.Repos;
-using EF.Server.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,10 @@ namespace EF.Repo
 {
     public class SubjectRepo : RepositoryBase<Subject>
     {
-        TestDataContext? testDataContext = null;
-        public SubjectRepo(TestDataContext testDataContext) : base(testDataContext)
+
+
+        InMemoryContext? testDataContext = null;
+        public SubjectRepo(InMemoryContext testDataContext) : base(testDataContext)
         {
             this.testDataContext = testDataContext;
             MakeSubjectTestData();

@@ -1,19 +1,13 @@
-﻿using EF.Models;
+﻿using EF.Context;
 using EF.Models;
 using EF.Repos;
-using EF.Server.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF.Repo
 {
     public class TypeOfSubjectRepo : RepositoryBase<TypeOfSubject>
     {
-        TestDataContext? testDataContext = null;
-        public TypeOfSubjectRepo(TestDataContext testDataContext) : base(testDataContext)
+        InMemoryContext? testDataContext = null;
+        public TypeOfSubjectRepo(InMemoryContext testDataContext) : base(testDataContext)
         {
             this.testDataContext = testDataContext;
             MakeSubjectTestData();

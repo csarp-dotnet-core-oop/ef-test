@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
-using EF.Models;
-using EF.Server.Context;
+using EF.Context;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,9 +8,9 @@ namespace EF.Repos
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         private bool disposed = false;
-        protected TestDataContext Context { get; set; }
+        protected InMemoryContext Context { get; set; }
 
-        public RepositoryBase(TestDataContext context)
+        public RepositoryBase(InMemoryContext context)
         {
             Context = context;
         }

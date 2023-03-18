@@ -1,18 +1,14 @@
-﻿using EF.Models;
+﻿using EF.Context;
+using EF.Models;
 using EF.Repos;
-using EF.Server.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF.Repo
 {
-    public class AddressRepo : RepositoryBase<Address>
+   public class AddressRepo : RepositoryBase<Address>
     {
-        private TestDataContext context;
-        public AddressRepo(TestDataContext context) 
+        private InMemoryContext context;
+
+        public AddressRepo(InMemoryContext context) 
             : base(context)
         {
             this.context = context;

@@ -1,6 +1,6 @@
-﻿using EF.Models;
+﻿using EF.Context;
+using EF.Models;
 using EF.Repos;
-using EF.Server.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +11,9 @@ namespace EF.Repo
 {
     public class TeachTeacherSubjectRepo : RepositoryBase<TeachTeacherSubject>
     {
-        private TestDataContext? testDataContext;
+        private InMemoryContext? testDataContext;
 
-        public TeachTeacherSubjectRepo(TestDataContext testDataContext) : base(testDataContext)
+        public TeachTeacherSubjectRepo(InMemoryContext testDataContext) : base(testDataContext)
         {
             this.testDataContext = testDataContext;
             MakeTestData();

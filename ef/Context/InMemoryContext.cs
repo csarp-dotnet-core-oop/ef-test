@@ -1,9 +1,14 @@
 ﻿using EF.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EF.Server.Context
+namespace EF.Context
 {
-    public class TestDataContext : DbContext
+    public class InMemoryContext : DbContext
     {
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
@@ -12,25 +17,15 @@ namespace EF.Server.Context
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<TypeOfSubject> TypeOfSubjects { get; set; }
         public DbSet<TeachTeacherSubject> TeachTeaherSubjects { get; set; }
-        public DbSet<TeachTeacherSchoolClass> TeachTeacherSchoolClasses { get; set }
+        public DbSet<TeachTeacherSchoolClass> TeachTeacherSchoolClasses { get; set; }
 
-        public TestDataContext(DbContextOptions<TestDataContext> options) : base(options)
-        { 
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public InMemoryContext(DbContextOptions<InMemoryContext> options)
+          : base(options)
         {
-            //optionsBuilder.LogTo(Console.WriteLine);
-            //optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // https://www.entityframeworktutorial.net/efcore/configure-one-to-one-relationship-using-fluent-api-in-ef-core.aspx
-            // https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx
-            // https://www.yogihosting.com/fluent-api-one-to-one-relationship-entity-framework-core/
-            // https://www.youtube.com/watch?v=Zt4G9HB6-C4&ab_channel=CodeSemantic
-
             // one - one relationship
             modelBuilder.Entity<Teacher>()
                  .HasOne<Address>(teacher => teacher.TeacherAddress)
@@ -41,7 +36,7 @@ namespace EF.Server.Context
                 .HasOne<Address>(student => student.StudentAddress)
                 .WithOne()
                 .HasForeignKey<Student>(student => student.StudentAddressId);
-           
+
             // one - many relationship
             modelBuilder.Entity<Student>()
                 .HasOne<SchoolClass>(student => student.SchoolClassOfStudent)
@@ -52,6 +47,9 @@ namespace EF.Server.Context
             // many - many ralition ship
             modelBuilder.Entity<TeachTeacherSubject>()
                 .HasKey(tts => new { tts.SubjectId, tts.TeacherId });
+            modelBuilder.Entity<TeachTeacherSchoolClass>()
+                .HasKey(tts => new { tts.TeacherId, tts.SchoolClassId});       
+
 
             modelBuilder.Entity<TeachTeacherSubject>()
                 .HasOne<Teacher>(tts => tts.Techher)
@@ -61,9 +59,8 @@ namespace EF.Server.Context
             modelBuilder.Entity<TeachTeacherSubject>()
                 .HasOne<Subject>(tts => tts.Subject)
                 .WithMany()
-                .HasForeignKey(tts => tts.SubjectId);                                  
+                .HasForeignKey(tts => tts.SubjectId);
 
-            base.OnModelCreating(modelBuilder);
         }
     }
 }
